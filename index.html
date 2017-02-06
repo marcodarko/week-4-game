@@ -61,7 +61,7 @@ Latest compiled and minified JavaScript
 		<div class="scoreCont">
 			YOUR TOTAL SCORE IS:
 		</div>
-		<div id="myscore" class="scoreCont">
+		<div id="MS" class="scoreCont">
 			00
 		</div>
 	</div>
@@ -105,21 +105,13 @@ $(document).ready(function(){
 
 	function addNumber (x){
 		var g=myNumber+x;
-		$("#myscored").text(g);
+		myNumber=g;
+		console.log("Result from addNumber: "+ g);
+		$("#MS").text(myNumber);
 	};
 
-	function GAME (){
-
-		RCompN();
-		JewelRandomValue();
-
-		$(".jewelButton").on("click",function(){
-			 var x = $(this).val();
-			console.log("jewel clicked "+x);
-			addNumber(x);
-		});
-
-		if(myNumber==computerNumber){
+	function compareResult() {
+		if(myNumber===computerNumber){
 			winCount++;
 			$("#wins").text(winCount);
 			$("#messages").text("You Win");
@@ -128,11 +120,27 @@ $(document).ready(function(){
 			lossCount++;
 			$("#losses").text(lossCount);
 			$("#messages").text("You Lose");
-			RCompN();
+			myNumber=null;
+			$("#MS").text(myNumber);
+			GAME();
 		}
 		else if(myNumber<computerNumber){
 			$("#messages").text("Higher");
 		}
+	}
+
+	function GAME (){
+
+		RCompN();
+		JewelRandomValue();
+
+		$(".jewelButton").on("click",function(){
+			 //var x = $(this).data("value");
+			 x=5
+			addNumber(x);
+			console.log("jewel clicked "+x);
+			compareResult();
+		});
 
 	};
 
