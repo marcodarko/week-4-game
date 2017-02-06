@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<title>Crystal Collector</title>
+<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+<!-- Latest compiled and minified CSS -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+Latest compiled and minified JavaScript
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+<!-- My Style Sheet -->
+<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<!-- JQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<!-- favicon -->
+<link rel="icon" type="image/png" href="assets/images/favicon.png" sizes="32x32" />
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div class="Maincontainer">
+		<h1 id="LOGO">
+			CRYSTAL COLLECTOR
+		</h1>
+	</div>
+	<!-- top container -->
+	<div id="topContainer">
+		<div id="leftCont">
+			64
+		</div>
+		<div id="rightCont">
+			<div id="messages" class="rightContSection">
+				Message
+			</div>
+			<div id="wins" class="rightContSection">
+				Scores
+			</div>
+			<div id="losses" class="rightContSection">
+				Losses
+			</div>
+		</div>
+	</div>
+	<!-- middle container -->
+	<div id="jewelCont">
+		<div class="jewel">
+			<img src="assets/images/diamond.png" alt="jewel" value=null >
+		</div>
+		<div class="jewel">
+			<img  class="jewelButton" src="assets/images/heart.png" alt="jewel">
+		</div>
+		<div class="jewel">
+			<img class="jewelButton" src="assets/images/rainbow.png" alt="jewel">
+		</div>
+		<div class="jewel">
+			<img class="jewelButton" src="assets/images/redjewel.png" alt="jewel">
+		</div>
+	</div>
+	<!-- bottom Container -->
+	<div id="bottomCont">
+		<div class="scoreCont">
+			YOUR TOTAL SCORE IS:
+		</div>
+		<div class="scoreCont">
+			00
+		</div>
+	</div>
+
+<!-- JQuery -->
+<script type="text/javascript">	
+$(document).ready(function(){
+
+	var message=null;
+	var winCount= null;
+	var lossCount=null;
+	var computerNumber=null;
+	var myNumber=null;
+	var tempNumber=null;
+	var gameOngoing= true;
+	var resetCompNumber=true;
+
+	function RCompN(){
+	computerNumber=Math.floor((Math.random() * 120) + 19);
+	};
+
+	function addNumber (x){
+		myNumber+x;
+		return myNumber;
+	};
+
+	function GAME (){
+
+		RCompN();
+
+		$(".jewelButton").on("click",function(){
+			var x= $(this.value);
+			addNumber(x);
+		});
+
+		if(myNumber==computerNumber){
+			winCount++;
+			$("wins").html(winCount);
+			$("messages").html("You Win");
+		}
+		else if(myNumber>computerNumber){
+			lossCount++;
+			$("losses").html(lossCount);
+			$("messages").html("You Lose");
+			RCompN();
+		}
+		else if(myNumber<computerNumber){
+			$("messages").html("Higher");
+		}
+
+	};
+
+if(gameOngoing){
+		GAME();
+	}
+
+
+});
+</script>
+
+</body>
+</html>
