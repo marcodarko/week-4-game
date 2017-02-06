@@ -44,16 +44,16 @@ Latest compiled and minified JavaScript
 	<!-- middle container -->
 	<div id="jewelCont">
 		<div class="jewel">
-			<img src="assets/images/diamond.png" alt="jewel" value=null >
+			<img class="jewelButton" src="assets/images/diam.gif" alt="jewel" >
 		</div>
 		<div class="jewel">
-			<img  class="jewelButton" src="assets/images/heart.png" alt="jewel">
+			<img  class="jewelButton" src="assets/images/pink.gif" alt="jewel">
 		</div>
 		<div class="jewel">
-			<img class="jewelButton" src="assets/images/rainbow.png" alt="jewel">
+			<img class="jewelButton" src="assets/images/sims.gif" alt="jewel" >
 		</div>
 		<div class="jewel">
-			<img class="jewelButton" src="assets/images/redjewel.png" alt="jewel">
+			<img class="jewelButton" src="assets/images/purple.gif" alt="jewel" >
 		</div>
 	</div>
 	<!-- bottom Container -->
@@ -61,7 +61,7 @@ Latest compiled and minified JavaScript
 		<div class="scoreCont">
 			YOUR TOTAL SCORE IS:
 		</div>
-		<div class="scoreCont">
+		<div id="myscore" class="scoreCont">
 			00
 		</div>
 	</div>
@@ -81,35 +81,57 @@ $(document).ready(function(){
 
 	function RCompN(){
 	computerNumber=Math.floor((Math.random() * 120) + 19);
+	$("#leftCont").text(computerNumber);
+	console.log("Goal Number: "+computerNumber);
+	};
+
+	function JewelRandomValue() {
+		//for (i=1; i<5;i++){
+			var a=Math.floor((Math.random() * 12) + 1);
+			var b=Math.floor((Math.random() * 12) + 1);
+			var c=Math.floor((Math.random() * 12) + 1);
+			var d=Math.floor((Math.random() * 12) + 1);
+			
+			$("#jewelButton:nth-child(1)").data("value", a);
+			console.log("Jewel A Value: "+a);
+			$("#jewelButton:nth-child(2)").data("value", b);
+			console.log("Jewel B Value: "+b);
+			$("#jewelButton:nth-child(3)").data("value", c);
+			console.log("Jewel C Value: "+c);
+			$("#jewelButton:nth-child(4)").data("value", d);
+			console.log("Jewel D Value: "+d);
+		//}
 	};
 
 	function addNumber (x){
-		myNumber+x;
-		return myNumber;
+		var g=myNumber+x;
+		$("#myscored").text(g);
 	};
 
 	function GAME (){
 
 		RCompN();
+		JewelRandomValue();
 
 		$(".jewelButton").on("click",function(){
-			var x= $(this.value);
+			 var x = $(this).val();
+			console.log("jewel clicked "+x);
 			addNumber(x);
 		});
 
 		if(myNumber==computerNumber){
 			winCount++;
-			$("wins").html(winCount);
-			$("messages").html("You Win");
+			$("#wins").text(winCount);
+			$("#messages").text("You Win");
 		}
 		else if(myNumber>computerNumber){
 			lossCount++;
-			$("losses").html(lossCount);
-			$("messages").html("You Lose");
+			$("#losses").text(lossCount);
+			$("#messages").text("You Lose");
 			RCompN();
 		}
 		else if(myNumber<computerNumber){
-			$("messages").html("Higher");
+			$("#messages").text("Higher");
 		}
 
 	};

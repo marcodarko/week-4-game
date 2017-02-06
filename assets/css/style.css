@@ -47,6 +47,7 @@ body{
 }
 
 #leftCont{
+	padding: 20px;
 	flex: 1;
 	font-size: 70px;
 	color: white;
@@ -71,6 +72,7 @@ body{
 
 .rightContSection:first-child{
 	border-top-right-radius: 20px;
+	color: hotpink;
 }
 
 .rightContSection:nth-child(odd){
