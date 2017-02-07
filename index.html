@@ -34,10 +34,10 @@ Latest compiled and minified JavaScript
 				Message
 			</div>
 			<div id="wins" class="rightContSection">
-				Wins
+				Wins:
 			</div>
 			<div id="losses" class="rightContSection">
-				Losses
+				Losses:
 			</div>
 		</div>
 	</div>
@@ -112,7 +112,7 @@ $(document).ready(function(){
 	function compareResult() {
 		if(myNumber===computerNumber){
 			winCount++;
-			$("#wins").text(winCount);
+			$("#wins").text("Wins: "+winCount);
 			$("#messages").text("You Win");
 			myNumber=0;
 			$("#MS").text(myNumber);
@@ -120,7 +120,7 @@ $(document).ready(function(){
 		}
 		else if(myNumber>computerNumber){
 			lossCount++;
-			$("#losses").text(lossCount);
+			$("#losses").text("Losses: "+lossCount);
 			$("#messages").text("You Lose");
 			myNumber=0;
 			$("#MS").text(myNumber);
