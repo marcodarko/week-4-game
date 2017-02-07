@@ -34,7 +34,7 @@ Latest compiled and minified JavaScript
 				Message
 			</div>
 			<div id="wins" class="rightContSection">
-				Scores
+				Wins
 			</div>
 			<div id="losses" class="rightContSection">
 				Losses
@@ -44,16 +44,16 @@ Latest compiled and minified JavaScript
 	<!-- middle container -->
 	<div id="jewelCont">
 		<div class="jewel">
-			<img class="jewelButton" src="assets/images/diam.gif" alt="jewel" >
+			<img class="jewelButton j1" src="assets/images/diam.gif" alt="jewel" >
 		</div>
 		<div class="jewel">
-			<img  class="jewelButton" src="assets/images/pink.gif" alt="jewel">
+			<img  class="jewelButton j2" src="assets/images/pink.gif" alt="jewel">
 		</div>
 		<div class="jewel">
-			<img class="jewelButton" src="assets/images/sims.gif" alt="jewel" >
+			<img class="jewelButton j3" src="assets/images/sims.gif" alt="jewel" >
 		</div>
 		<div class="jewel">
-			<img class="jewelButton" src="assets/images/purple.gif" alt="jewel" >
+			<img class="jewelButton j4" src="assets/images/purple.gif" alt="jewel" >
 		</div>
 	</div>
 	<!-- bottom Container -->
@@ -74,7 +74,7 @@ $(document).ready(function(){
 	var winCount= null;
 	var lossCount=null;
 	var computerNumber=null;
-	var myNumber=null;
+	var myNumber=0;
 	var tempNumber=null;
 	var gameOngoing= true;
 	var resetCompNumber=true;
@@ -86,25 +86,24 @@ $(document).ready(function(){
 	};
 
 	function JewelRandomValue() {
-		//for (i=1; i<5;i++){
+		
 			var a=Math.floor((Math.random() * 12) + 1);
 			var b=Math.floor((Math.random() * 12) + 1);
 			var c=Math.floor((Math.random() * 12) + 1);
 			var d=Math.floor((Math.random() * 12) + 1);
 			
-			$("#jewelButton:nth-child(1)").data("value", a);
+			$(".j1").attr("value", a);
 			console.log("Jewel A Value: "+a);
-			$("#jewelButton:nth-child(2)").data("value", b);
+			$(".j2").attr("value", b);
 			console.log("Jewel B Value: "+b);
-			$("#jewelButton:nth-child(3)").data("value", c);
+			$(".j3").attr("value", c);
 			console.log("Jewel C Value: "+c);
-			$("#jewelButton:nth-child(4)").data("value", d);
+			$(".j4").attr("value", d);
 			console.log("Jewel D Value: "+d);
-		//}
 	};
 
-	function addNumber (x){
-		var g=myNumber+x;
+	function addNumber (jewelClicked){
+		var g=parseInt(myNumber)+parseInt(jewelClicked);
 		myNumber=g;
 		console.log("Result from addNumber: "+ g);
 		$("#MS").text(myNumber);
@@ -115,17 +114,20 @@ $(document).ready(function(){
 			winCount++;
 			$("#wins").text(winCount);
 			$("#messages").text("You Win");
+			myNumber=0;
+			$("#MS").text(myNumber);
+			GAME();
 		}
 		else if(myNumber>computerNumber){
 			lossCount++;
 			$("#losses").text(lossCount);
 			$("#messages").text("You Lose");
-			myNumber=null;
+			myNumber=0;
 			$("#MS").text(myNumber);
 			GAME();
 		}
 		else if(myNumber<computerNumber){
-			$("#messages").text("Higher");
+			$("#messages").text("Keep Going!");
 		}
 	}
 
@@ -133,20 +135,18 @@ $(document).ready(function(){
 
 		RCompN();
 		JewelRandomValue();
-
-		$(".jewelButton").on("click",function(){
-			 //var x = $(this).data("value");
-			 x=5
-			addNumber(x);
-			console.log("jewel clicked "+x);
-			compareResult();
-		});
-
+			$(".j1, .j2, .j3, .j4").on("click",function(){
+				var x = $(this).attr("value");
+				addNumber(x);
+				console.log("jewel clicked "+x);
+				compareResult();
+			});
 	};
 
-if(gameOngoing){
-		GAME();
-	}
+// Game starts
+
+GAME();
+	
 
 
 });
