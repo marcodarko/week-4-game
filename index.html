@@ -70,22 +70,109 @@ Latest compiled and minified JavaScript
 <script type="text/javascript">	
 $(document).ready(function(){
 
-	var message=null;
-	var winCount= null;
-	var lossCount=null;
-	var computerNumber=null;
-	var myNumber=0;
-	var tempNumber=null;
-	var gameOngoing= true;
-	var resetCompNumber=true;
 
-	function RCompN(){
-	computerNumber=Math.floor((Math.random() * 120) + 19);
-	$("#leftCont").text(computerNumber);
-	console.log("Goal Number: "+computerNumber);
-	};
+//                    NON OBJECT GAME 
 
-	function JewelRandomValue() {
+
+// 	var message=null;
+// 	var winCount= null;
+// 	var lossCount=null;
+// 	var computerNumber=null;
+// 	var myNumber=0;
+// 	var tempNumber=null;
+// 	var gameOngoing= true;
+// 	var resetCompNumber=true;
+
+
+// 	function RCompN(){
+// 	computerNumber=Math.floor((Math.random() * 120) + 19);
+// 	$("#leftCont").text(computerNumber);
+// 	console.log("Goal Number: "+computerNumber);
+// 	};
+
+// 	function JewelRandomValue() {
+		
+// 			var a=Math.floor((Math.random() * 12) + 1);
+// 			var b=Math.floor((Math.random() * 12) + 1);
+// 			var c=Math.floor((Math.random() * 12) + 1);
+// 			var d=Math.floor((Math.random() * 12) + 1);
+			
+// 			$(".j1").attr("value", a);
+// 			console.log("Jewel A Value: "+a);
+// 			$(".j2").attr("value", b);
+// 			console.log("Jewel B Value: "+b);
+// 			$(".j3").attr("value", c);
+// 			console.log("Jewel C Value: "+c);
+// 			$(".j4").attr("value", d);
+// 			console.log("Jewel D Value: "+d);
+// 	};
+
+// 	function addNumber (jewelClicked){
+// 		var g=parseInt(myNumber)+parseInt(jewelClicked);
+// 		myNumber=g;
+// 		console.log("Result from addNumber: "+ g);
+// 		$("#MS").text(myNumber);
+// 	};
+
+// 	function compareResult() {
+// 		if(myNumber===computerNumber){
+// 			winCount++;
+// 			$("#wins").text("Wins: "+winCount);
+// 			$("#messages").text("You Win");
+// 			myNumber=0;
+// 			$("#MS").text(myNumber);
+// 			GAME();
+// 		}
+// 		else if(myNumber>computerNumber){
+// 			lossCount++;
+// 			$("#losses").text("Losses: "+lossCount);
+// 			$("#messages").text("You Lose");
+// 			myNumber=0;
+// 			$("#MS").text(myNumber);
+// 			GAME();
+// 		}
+// 		else if(myNumber<computerNumber){
+// 			$("#messages").text("Keep Going!");
+// 		}
+// 	}
+
+// 	function GAME (){
+
+// 		RCompN();
+// 		JewelRandomValue();
+// 			$(".j1, .j2, .j3, .j4").on("click",function(){
+// 				var x = $(this).attr("value");
+// 				addNumber(x);
+// 				console.log("jewel clicked "+x);
+// 				compareResult();
+// 			});
+// 	};
+
+// // Game starts
+
+// GAME();
+
+
+//                 OBJECT GAME
+
+var CrystalGAME={
+	message: null,
+	winCount: null,
+	lossCount:null,
+	computerNumber:null,
+	myNumber:0,
+	tempNumber:null,
+	gameOngoing: true,
+	resetCompNumber:true,
+
+
+	RCompN:function(){
+	this.computerNumber=Math.floor((Math.random() * 120) + 19);
+	$("#leftCont").text(this.computerNumber);
+	console.log("Goal Number: "+this.computerNumber);
+	},
+
+	JewelRandomValue:function() {
 		
 			var a=Math.floor((Math.random() * 12) + 1);
 			var b=Math.floor((Math.random() * 12) + 1);
@@ -100,53 +187,52 @@ $(document).ready(function(){
 			console.log("Jewel C Value: "+c);
 			$(".j4").attr("value", d);
 			console.log("Jewel D Value: "+d);
-	};
+	},
 
-	function addNumber (jewelClicked){
-		var g=parseInt(myNumber)+parseInt(jewelClicked);
-		myNumber=g;
+	addNumber: function (jewelClicked){
+		var g=parseInt(this.myNumber)+parseInt(jewelClicked);
+		this.myNumber=g;
 		console.log("Result from addNumber: "+ g);
-		$("#MS").text(myNumber);
-	};
+		$("#MS").text(this.myNumber);
+	},
 
-	function compareResult() {
-		if(myNumber===computerNumber){
-			winCount++;
-			$("#wins").text("Wins: "+winCount);
+	compareResult: function() {
+		if(this.myNumber===this.computerNumber){
+			this.winCount++;
+			$("#wins").text("Wins: "+CrystalGAME.winCount);
 			$("#messages").text("You Win");
-			myNumber=0;
-			$("#MS").text(myNumber);
-			GAME();
+			CrystalGAME.myNumber=0;
+			$("#MS").text(this.myNumber);
+			CrystalGAME.GAME();
 		}
-		else if(myNumber>computerNumber){
-			lossCount++;
-			$("#losses").text("Losses: "+lossCount);
+		else if(this.myNumber>this.computerNumber){
+			CrystalGAME.lossCount++;
+			$("#losses").text("Losses: "+CrystalGAME.lossCount);
 			$("#messages").text("You Lose");
-			myNumber=0;
-			$("#MS").text(myNumber);
-			GAME();
+			CrystalGAME.myNumber=0;
+			$("#MS").text(CrystalGAME.myNumber);
+			CrystalGAME.GAME();
 		}
-		else if(myNumber<computerNumber){
+		else if(this.myNumber<this.computerNumber){
 			$("#messages").text("Keep Going!");
 		}
-	}
+	},
 
-	function GAME (){
+	GAME: function (){
 
-		RCompN();
-		JewelRandomValue();
+		this.RCompN();
+		this.JewelRandomValue();
 			$(".j1, .j2, .j3, .j4").on("click",function(){
 				var x = $(this).attr("value");
-				addNumber(x);
+				CrystalGAME.addNumber(x);
 				console.log("jewel clicked "+x);
-				compareResult();
+				CrystalGAME.compareResult();
 			});
-	};
-
+	}
+};
 // Game starts
 
-GAME();
-	
+CrystalGAME.GAME();	
 
 
 });
